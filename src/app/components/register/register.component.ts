@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
 
   public page_title: string;
   public user: User;
+  public status: string;
 
   constructor(
     private _userService: UserService
@@ -22,11 +23,25 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.user);
-    console.log(this._userService.prueba());
+    // console.log(this._userService.prueba());
   }
 
   onSubmit(form) {
-    console.log(this.user);
+    // console.log(this.user);
+    this._userService.register(this.user).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.status = 'success';
+          form.reset();
+        } else {
+          this.status = 'error';
+        }
+      },
+      error => {
+        this.status = 'error';
+        console.log(error);
+      }
+    )
   }
 
 }
