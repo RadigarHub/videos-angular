@@ -1,4 +1,15 @@
-<div class="col-md-12 mt-3">
+<div class="col-md-12 mt-3" *ngIf="identity">
   <h1>{{page_title}}</h1>
   <hr>
+</div>
+<div class="col-md-12 mt-3" *ngIf="!identity">
+  <div class="jumbotron">
+    <h1 class="display-4">Bienvenido a Favovídeos</h1>
+    <p class="lead">Regístrate en la web para guardar tus vídeos favoritos de Youtube y poder verlos cuanddo quieras.</p>
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" [routerLink]="['/login']" role="button">Identifícate</a>
+      <a class="btn btn-success btn-lg ml-3" [routerLink]="['/registro']" role="button">Regístrate</a>
+    </p>
+  </div>
 </div>
