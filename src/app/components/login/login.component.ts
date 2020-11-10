@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Se ejecuta siempre pero sólo cierra la sesión cuando le llega el parámetro 'sure' por la URL
+    this.logout();
   }
 
   onSubmit(form) {
@@ -45,7 +47,7 @@ export class LoginComponent implements OnInit {
                 this.token = response;
                 // console.log(this.user);
                 // console.log(this.token);
-                
+
                 localStorage.setItem('token', this.token);
                 localStorage.setItem('identity', JSON.stringify(this.identity));
 
@@ -70,6 +72,22 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  logout() {
+    this._route.params.subscribe(params => {
+      let sure = Number(params['sure']);
+
+      if (sure == 1) {
+        localStorage.removeItem('identity');
+        localStorage.removeItem('token');
+
+        this.identity = null;
+        this.token = null;
+
+        this._router.navigate(['/inicio']);
+      }
+    });
   }
 
 }
