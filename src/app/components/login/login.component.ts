@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
   public page_title: string;
 
   public user: User;
+  public identity;
+  public token: string;
   public status: string;
 
   constructor(
@@ -26,7 +28,39 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form) {
-    console.log(this.user);
+    // console.log(this.user);
+    this._userService.signup(this.user).subscribe(
+      response => {
+        if (response.status != 'error') {
+          this.status = 'success';
+          this.identity = response;
+
+          // Obtener el token
+          this._userService.signup(this.user, true).subscribe(
+            response => {
+              if (response.status != 'error') {
+                this.token = response;
+                console.log(this.user);
+                console.log(this.token);
+              } else {
+                this.status = 'error';
+              }
+            },
+            error => {
+              this.status = 'error';
+              console.log(error);
+            }
+          );
+
+        } else {
+          this.status = 'error';
+        }
+      },
+      error => {
+        this.status = 'error';
+        console.log(error);
+      }
+    );
   }
 
 }
