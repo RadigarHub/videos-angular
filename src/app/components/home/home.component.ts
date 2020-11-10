@@ -12,15 +12,21 @@ export class HomeComponent implements OnInit {
 
   public page_title: string;
   public identity;
+  public token;
 
   constructor(
     private _userService: UserService
   ) {
-    this.page_title = "Inicio";
+    this.page_title = "Mis vídeos";
   }
 
   ngOnInit(): void {
+    this.loadUser();
+  }
+
+  loadUser() {
     this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
   }
 
 }
