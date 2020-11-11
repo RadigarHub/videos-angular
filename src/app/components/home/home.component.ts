@@ -52,6 +52,13 @@ export class HomeComponent implements OnInit {
     this._videoService.getVideos(this.token, page).subscribe(
       response => {
         this.videos = response.videos;
+
+        var number_pages = [];
+        for (var i=1; i<=response.total_pages; i++) {
+          number_pages.push(i)
+        }
+        this.number_pages = number_pages;
+
       },
       error => {
         console.log(error);
