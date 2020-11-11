@@ -15,6 +15,7 @@ export class VideoNewComponent implements OnInit {
   public identity;
   public token: string;
   public video: Video;
+  public status: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -28,6 +29,10 @@ export class VideoNewComponent implements OnInit {
   
   ngOnInit(): void {
     this.video = new Video(1, this.identity.sub, '', '', '', '', null, null);
+  }
+
+  onSubmit(form) {
+    console.log(this.video);
   }
 
 }
