@@ -13,6 +13,7 @@ import { ErrorComponent } from './components/error/error.component';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'inicio', component: HomeComponent},
+  {path: 'inicio/:page', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout/:sure', component: LoginComponent},
   {path: 'registro', component: RegisterComponent},
